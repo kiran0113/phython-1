@@ -28,3 +28,14 @@ jobs:
         with:
           push: true
           tags: kiranyn/kiran:latest
+          
+      - name: Deploy to DigitalOcean Droplet via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          script: |
+            docker pull kiranyn/demo1:latest
+            docker stop demo1 || true && docker rm demo1 || true
+            docker run -d --name demo1 -p 8080:80 kiranyn/kiran:latest
