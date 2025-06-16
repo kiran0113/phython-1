@@ -38,4 +38,4 @@ jobs:
           script: |
             docker pull kiranyn/demo1:latest
             docker stop demo1 || true && docker rm demo1 || true
-            docker run -d --name demo1 -p 8080:5000 kiranyn/kiran:latest
+            docker run -d --name demo1 -p 8080:80 kiranyn/kiran:latest
